@@ -5,4 +5,4 @@ numpy
 matplotlib
 scikit-learn
 scipy
-plotlystreamlit
+plotly==5.24.1
