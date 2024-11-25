@@ -22,7 +22,7 @@ st.title("Regression")
 
 st.subheader('Raw Data')
 
-csv_url = "./data/data2.csv"
+csv_url = "./data2.csv"
 
 # Reading the CSV data from the specified URL into a DataFrame named 'df'
 df = pd.read_csv(csv_url)
