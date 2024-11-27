@@ -18,11 +18,11 @@ from scipy.special import inv_boxcox
 from scipy.stats import boxcox_normplot
 
 
-st.title("Regression")
+st.title("Finance Adviser")
 
 st.subheader('Raw Data')
 
-csv_url = "./data2.csv"
+csv_url = "./data/cleaned_data.csv"
 
 # Reading the CSV data from the specified URL into a DataFrame named 'df'
 df = pd.read_csv(csv_url)
@@ -141,12 +141,47 @@ y_pred = linear_model.predict(X_test)
 st.write('## Predict Your Own Charges')
 
 # User input for features
-Income = st.slider('Income (in 1000$)', min_value=df['Income_transform'].min(), max_value=df['Income_transform'].max(), value=df['Income_transform'].mean())
+# Income = st.slider('Income (in 1000₹)', min_value=df['Income_transform'].min(), max_value=df['Income_transform'].max(), value=df['Income_transform'].mean())
 Age = st.slider('Age', min_value=df['Age'].min(), max_value=df['Age'].max(), value=int(df['Age'].mode()))
 Dependents = st.slider('Dependents', min_value=df['Dependents'].min(), max_value=df['Dependents'].max(), value=int(df['Dependents'].mode()))
 Occupation = st.selectbox('Occupation', ['Professional', 'Student', 'Self_Employed', 'Retired'])
 City_Tier = st.selectbox('City_Tier', ['Tier_1', 'Tier_2', 'Tier_3'])
-Rent = st.slider('Rent (in 1000$)', min_value=df['Rent_transform'].min(), max_value=df['Rent_transform'].max(), value=df['Rent_transform'].mean())
+Rent = st.slider('Rent (in 1000₹)', min_value=df['Rent_transform'].min(), max_value=df['Rent_transform'].max(), value=df['Rent_transform'].mean())
 Loan_Repayment = st.slider('Loan_Repayment', min_value=df['Loan_Repayment'].min(), max_value=df['Loan_Repayment'].max(), value=df['Loan_Repayment'].mean())
-Insurance = st.slider('Insurance (in 1000$)', min_value=df['Insurance_transform'].min(), max_value=df['Insurance_transform'].max(), value=df['Insurance_transform'].mean())
+Insurance = st.slider('Insurance (in 1000₹)', min_value=df['Insurance_transform'].min(), max_value=df['Insurance_transform'].max(), value=df['Insurance_transform'].mean())
+Groceries = st.slider('Groceries (in 1000₹)', min_value=df['Groceries_transform'].min(), max_value=df['Groceries_transform'].max(), value=df['Groceries_transform'].mean())
+Transport = st.slider('Transport (in 1000₹)', min_value=df['Transport_transform'].min(), max_value=df['Transport_transform'].max(), value=df['Transport_transform'].mean())
+Eating_Out = st.slider('Eating_Out (in 1000₹)', min_value=df['Eating_Out_transform'].min(), max_value=df['Eating_Out_transform'].max(), value=df['Eating_Out_transform'].mean())
+Entertainment = st.slider('Entertainment (in 1000₹)', min_value=df['Entertainment_transform'].min(), max_value=df['Entertainment_transform'].max(), value=df['Entertainment_transform'].mean())
+Utilities = st.slider('Utilities (in 1000₹)', min_value=df['Utilities_transform'].min(), max_value=df['Utilities_transform'].max(), value=df['Utilities_transform'].mean())
+Healthcare = st.slider('Healthcare (in 1000₹)', min_value=df['Healthcare_transform'].min(), max_value=df['Healthcare_transform'].max(), value=df['Healthcare_transform'].mean())
+Education = st.slider('Education', min_value=df['Education'].min(), max_value=df['Education'].max(), value=df['Education'].mean())
+Miscellaneous = st.slider('Miscellaneous', min_value=df['Miscellaneous'].min(), max_value=df['Miscellaneous'].max(), value=df['Miscellaneous'].mean())
+Desired_Savings_Pourcentage = st.slider('Desired_Savings_Pourcentage (in 1000₹)', min_value=df['Desired_Savings_Pourcentage_transform'].min(), max_value=df['Desired_Savings_Pourcentage_transform'].max(), value=df['Desired_Savings_Pourcentage_transform'].mean())
+Desired_Savings = st.slider('Desired_Savings', min_value=df['Desired_Savings'].min(), max_value=df['Desired_Savings'].max(), value=df['Desired_Savings'].mean())
+Disposable_Income = st.slider('Disposable_Income', min_value=df['Disposable_Income'].min(), max_value=df['Disposable_Income'].max(), value=df['Disposable_Income'].mean())
+Potential_Savings_Groceries = st.slider('Potential_Savings_Groceries (in 1000₹)', min_value=df['Potential_Savings_Groceries_transform'].min(), max_value=df['Potential_Savings_Groceries_transform'].max(), value=df['Potential_Savings_Groceries_transform'].mean())
+Potential_Savings_Transport = st.slider('Potential_Savings_Transport (in 1000₹)', min_value=df['Potential_Savings_Transport_transform'].min(), max_value=df['Potential_Savings_Transport_transform'].max(), value=df['Potential_Savings_Transport_transform'].mean())
+Potential_Savings_Eating_Out = st.slider('Potential_Savings_Eating_Out (in 1000₹)', min_value=df['Potential_Savings_Eating_Out_transform'].min(), max_value=df['Potential_Savings_Eating_Out_transform'].max(), value=df['Potential_Savings_Eating_Out_transform'].mean())
+Potential_Savings_Entertainment = st.slider('Potential_Savings_Entertainment (in 1000₹)', min_value=df['Potential_Savings_Entertainment_transform'].min(), max_value=df['Potential_Savings_Entertainment_transform'].max(), value=df['Potential_Savings_Entertainment_transform'].mean())
+Potential_Savings_Utilities = st.slider('Potential_Savings_Utilities (in 1000₹)', min_value=df['Potential_Savings_Utilities_transform'].min(), max_value=df['Potential_Savings_Utilities_transform'].max(), value=df['Potential_Savings_Utilities_transform'].mean())
+Potential_Savings_Healthcare = st.slider('Potential_Savings_Healthcare (in 1000₹)', min_value=df['Potential_Savings_Healthcare_transform'].min(), max_value=df['Potential_Savings_Healthcare_transform'].max(), value=df['Potential_Savings_Healthcare_transform'].mean())
+Potential_Savings_Education = st.slider('Potential_Savings_Education', min_value=df['Potential_Savings_Education'].min(), max_value=df['Potential_Savings_Education'].max(), value=df['Potential_Savings_Education'].mean())
+Potential_Savings_Miscellaneous = st.slider('Potential_Savings_Miscellaneous (in 1000₹)', min_value=df['Potential_Savings_Miscellaneous_transform'].min(), max_value=df['Potential_Savings_Miscellaneous_transform'].max(), value=df['Potential_Savings_Miscellaneous_transform'].mean())
 
+
+# Encode categorical variables for user input
+# sex_encode = 1 if sex == 'female' else 0
+Occupation_encode = ['Professional', 'Student', 'Self_Employed', 'Retired'].index(Occupation)
+City_Tier_encode = ['Tier_1', 'Tier_2', 'Tier_3'].index(City_Tier)
+
+
+# Predict charges
+predicted_Income_transformed = linear_model.predict([[Age, Dependents, Occupation_encode, City_Tier_encode, Rent, Loan_Repayment, Insurance, Groceries, Transport, Eating_Out, Entertainment, Utilities, Healthcare, Education, Miscellaneous, Desired_Savings_Pourcentage, Desired_Savings, Disposable_Income, 
+Potential_Savings_Groceries, Potential_Savings_Transport, Potential_Savings_Eating_Out, Potential_Savings_Entertainment, Potential_Savings_Utilities, Potential_Savings_Healthcare, Potential_Savings_Education, Potential_Savings_Miscellaneous]])
+
+# Reverse the Box-Cox transformation
+predicted_Income = inv_boxcox(predicted_Income_transformed, lambda_value)
+
+# Display prediction
+st.write('Predicted Income:', round(predicted_Income[0], 0))
