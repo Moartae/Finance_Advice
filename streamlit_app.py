@@ -22,7 +22,7 @@ st.title("Finance Adviser")
 
 st.subheader('Raw Data')
 
-csv_url = "./data/cleaned_data.csv"
+csv_url = "./cleaned_data.csv"
 
 # Reading the CSV data from the specified URL into a DataFrame named 'df'
 df = pd.read_csv(csv_url)
