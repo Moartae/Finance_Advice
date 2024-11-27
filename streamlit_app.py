@@ -138,7 +138,7 @@ linear_model.fit(X_train, y_train)
 y_pred = linear_model.predict(X_test)
 
 # Create Streamlit app
-st.write('## Predict Your Own Charges')
+st.write('## Predict Your Own Income')
 
 # User input for features
 # Income = st.slider('Income (in 1000₹)', min_value=df['Income_transform'].min(), max_value=df['Income_transform'].max(), value=df['Income_transform'].mean())
