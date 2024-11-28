@@ -168,10 +168,10 @@ total_expenses = (Loan_Repayment + Insurance + Groceries + Transport + Eating_Ou
 # Predict charges
 predicted_Income_transformed = linear_model.predict([[Age, Dependents, Occupation_encode, City_Tier_encode, Rent, total_expenses, Desired_Savings_Pourcentage, Desired_Savings, Disposable_Income, total_potential_savings]])
 
-# Reverse the Box-Cox transformation
+# Reverse the Box-Cox transformation, no one knows, search later
 predicted_Income = inv_boxcox(predicted_Income_transformed, lambda_value)
 
-st.write('hi')
+st.write('updated')
 
 # Display prediction
 st.write('Predicted Income:', round(predicted_Income[0], 0))
