@@ -106,22 +106,7 @@ df['Potential_Savings_Miscellaneous_transform'], lambda_value = stats.boxcox(df[
 X = df.drop(['Occupation', 'City_Tier', 'Income', 'Rent', 'Insurance', 'Groceries', 'Transport', 'Eating_Out', 'Entertainment', 'Utilities', 'Healthcare', 'Desired_Savings_Percentage', 'Potential_Savings_Groceries', 'Potential_Savings_Transport', 'Potential_Savings_Eating_Out', 'Potential_Savings_Entertainment', 'Potential_Savings_Utilities', 'Potential_Savings_Healthcare', 'Potential_Savings_Education', 'Potential_Savings_Miscellaneous',
             'Income_transform', 'Rent_transform', 'Insurance_transform', 'Groceries_transform', 'Transport_transform', 'Eating_Out_transform', 'Entertainment_transform', 'Utilities_transform', 'Healthcare_transform', 'Desired_Savings_Percentage', 'Potential_Savings_Groceries_transform', 'Potential_Savings_Transport_transform', 'Potential_Savings_Eating_Out_transform', 'Potential_Savings_Entertainment_transform', 'Potential_Savings_Utilities_transform', 'Potential_Savings_Healthcare_transform', 'Potential_Savings_Miscellaneous_transform'], axis=1)
 y = df['Income_transform']
-y = df['Rent_transform']
-y = df['Insurance_transform']
-y = df['Groceries_transform']
-y = df['Transport_transform']
-y = df['Eating_Out_transform']
-y = df['Entertainment_transform']
-y = df['Utilities_transform']
-y = df['Healthcare_transform']
-y = df['Desired_Savings_Pourcentage_transform']
-y = df['Potential_Savings_Groceries_transform']
-y = df['Potential_Savings_Transport_transform']
-y = df['Potential_Savings_Eating_Out_transform']
-y = df['Potential_Savings_Entertainment_transform']
-y = df['Potential_Savings_Utilities_transform']
-y = df['Potential_Savings_Healthcare_transform']
-y = df['Potential_Savings_Miscellaneous_transform']
+
 #  ' 'Desired_Savings_Percentage', 'Potential_Savings_Groceries_transform', 'Potential_Savings_Transport_transform', 'Potential_Savings_Eating_Out_transform', 'Potential_Savings_Entertainment_transform', 'Potential_Savings_Utilities_transform', 'Potential_Savings_Healthcare_transform', 'Potential_Savings_Miscellaneous_transform']
 
 # Split the dataset into X_train, X_test, y_train, and y_test, 10% of the data for testing
