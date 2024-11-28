@@ -105,9 +105,8 @@ df['Potential_Savings_Miscellaneous_transform'], lambda_value = stats.boxcox(df[
 # Define X (features) and y (target) and remove duplicate features that will not be used in the model
 X = df.drop(['Occupation', 'City_Tier', 'Income', 'Rent', 'Insurance', 'Groceries', 'Transport', 'Eating_Out', 'Entertainment', 'Utilities', 'Healthcare', 'Desired_Savings_Percentage', 'Potential_Savings_Groceries', 'Potential_Savings_Transport', 'Potential_Savings_Eating_Out', 'Potential_Savings_Entertainment', 'Potential_Savings_Utilities', 'Potential_Savings_Healthcare', 'Potential_Savings_Education', 'Potential_Savings_Miscellaneous',
             'Income_transform', 'Rent_transform', 'Insurance_transform', 'Groceries_transform', 'Transport_transform', 'Eating_Out_transform', 'Entertainment_transform', 'Utilities_transform', 'Healthcare_transform', 'Desired_Savings_Percentage', 'Potential_Savings_Groceries_transform', 'Potential_Savings_Transport_transform', 'Potential_Savings_Eating_Out_transform', 'Potential_Savings_Entertainment_transform', 'Potential_Savings_Utilities_transform', 'Potential_Savings_Healthcare_transform', 'Potential_Savings_Miscellaneous_transform'], axis=1)
+# y = df['Income_transform']
 y = df['Income_transform']
-
-#  ' 'Desired_Savings_Percentage', 'Potential_Savings_Groceries_transform', 'Potential_Savings_Transport_transform', 'Potential_Savings_Eating_Out_transform', 'Potential_Savings_Entertainment_transform', 'Potential_Savings_Utilities_transform', 'Potential_Savings_Healthcare_transform', 'Potential_Savings_Miscellaneous_transform']
 
 # Split the dataset into X_train, X_test, y_train, and y_test, 10% of the data for testing
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
@@ -123,7 +122,7 @@ linear_model.fit(X_train, y_train)
 y_pred = linear_model.predict(X_test)
 
 # Create Streamlit app
-st.write('## Predict Your Own Income')
+st.write('## Predict Your Own Charges')
 
 # User input for features
 # Income = st.slider('Income (in 1000₹)', min_value=df['Income_transform'].min(), max_value=df['Income_transform'].max(), value=df['Income_transform'].mean())
