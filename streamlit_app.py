@@ -7,6 +7,7 @@ import plotly.express as px
 
 import matplotlib.pyplot as plt
 
+
 from scipy import stats
 from sklearn import metrics
 from sklearn.cluster import KMeans
@@ -169,6 +170,8 @@ predicted_Income_transformed = linear_model.predict([[Age, Dependents, Occupatio
 
 # Reverse the Box-Cox transformation
 predicted_Income = inv_boxcox(predicted_Income_transformed, lambda_value)
+
+st.write('hi')
 
 # Display prediction
 st.write('Predicted Income:', round(predicted_Income[0], 0))
