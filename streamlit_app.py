@@ -21,7 +21,7 @@ from scipy.stats import boxcox_normplot
 
 st.title("Finance Adviser")
 
-st.subheader('Raw Data')
+st.subheader('Raw Data') # this is subtitle 
 
 csv_url = "./cleaned_data.csv"
 
