@@ -166,12 +166,12 @@ Occupation_encode = ['Professional', 'Student', 'Self_Employed', 'Retired'].inde
 City_Tier_encode = ['Tier_1', 'Tier_2', 'Tier_3'].index(City_Tier)
 
 # Total stuff
-# total_potential_savings = (Potential_Savings_Groceries + Potential_Savings_Transport + Potential_Savings_Eating_Out + Potential_Savings_Entertainment + Potential_Savings_Utilities + Potential_Savings_Healthcare + Potential_Savings_Education +  Potential_Savings_Miscellaneous)
-# total_expenses = (Loan_Repayment + Insurance + Groceries + Transport + Eating_Out + Entertainment + Utilities + Healthcare + Education + Miscellaneous)
+total_potential_savings = (Potential_Savings_Groceries + Potential_Savings_Transport + Potential_Savings_Eating_Out + Potential_Savings_Entertainment + Potential_Savings_Utilities + Potential_Savings_Healthcare + Potential_Savings_Education +  Potential_Savings_Miscellaneous)
+total_expenses = (Loan_Repayment + Insurance + Groceries + Transport + Eating_Out + Entertainment + Utilities + Healthcare + Education + Miscellaneous)
 # st.write(total_potential_savings)
 
 # Predict charges
-predicted_Income_transformed = linear_model.predict([[Age, Dependents, Occupation_encode, City_Tier_encode, Rent, Desired_Savings_Pourcentage, Desired_Savings, Disposable_Income]])
+predicted_Income_transformed = linear_model.predict([[Age, Dependents, Occupation_encode, City_Tier_encode, Rent, Desired_Savings_Pourcentage, Desired_Savings, Disposable_Income, total_expenses, total_potential_savings]])
 
 # Reverse the Box-Cox transformation, no one knows, search later
 predicted_Income = inv_boxcox(predicted_Income_transformed, lambda_value)
