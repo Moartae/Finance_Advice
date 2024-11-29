@@ -21,8 +21,10 @@ from scipy.stats import boxcox_normplot
 
 st.title("Finance Adviser")
 
-st.subheader('Raw Data') # this is subtitle 
+# this is subtitle 
+st.subheader('Raw Data')
 
+# The URL of the CSV file to be read into a DataFrame
 csv_url = "./cleaned_data.csv"
 
 # Reading the CSV data from the specified URL into a DataFrame named 'df'
@@ -72,12 +74,13 @@ fig = px.scatter(df, x=x_variable, y=y_variable, color=color_variable, size=size
 # Display the plot
 st.plotly_chart(fig)
 
-# Encode 'sex', 'smoker', and 'region' columns
+# Encode 'Occupation' and 'City_Tier' columns
 df['Occupation_encode'] = LabelEncoder().fit_transform(df['Occupation'])
 df['City_Tier_encode'] = LabelEncoder().fit_transform(df['City_Tier'])
 
 
-# Transform the 'charges' variable using Box-Cox transformation
+# Transform the variables using Box-Cox transformation
+
 df['Income_transform'], lambda_value = stats.boxcox(df['Income'])
 df['Rent_transform'], lambda_value = stats.boxcox(df['Rent'])
 # df['Loan_Repayment_transform'], lambda_value = stats.boxcox(df['Loan_Repayment'])
@@ -104,12 +107,14 @@ df['Potential_Savings_Miscellaneous_transform'], lambda_value = stats.boxcox(df[
 
 
 # Define X (features) and y (target) and remove duplicate features that will not be used in the model
-X = df.drop(['Occupation', 'City_Tier', 'Income', 'Rent', 'Insurance', 'Groceries', 'Transport', 'Eating_Out', 'Entertainment', 'Utilities', 'Healthcare', 'Desired_Savings_Percentage', 'Potential_Savings_Groceries', 'Potential_Savings_Transport', 'Potential_Savings_Eating_Out', 'Potential_Savings_Entertainment', 'Potential_Savings_Utilities', 'Potential_Savings_Healthcare', 'Potential_Savings_Education', 'Potential_Savings_Miscellaneous',
-            'Income_transform', 'Rent_transform', 'Insurance_transform', 'Groceries_transform', 'Transport_transform', 'Eating_Out_transform', 'Entertainment_transform', 'Utilities_transform', 'Healthcare_transform', 'Desired_Savings_Percentage', 'Potential_Savings_Groceries_transform', 'Potential_Savings_Transport_transform', 'Potential_Savings_Eating_Out_transform', 'Potential_Savings_Entertainment_transform', 'Potential_Savings_Utilities_transform', 'Potential_Savings_Healthcare_transform', 'Potential_Savings_Miscellaneous_transform'], axis=1)
-# y = df['Income_transform']
+
+X = df.drop(['Occupation', 'City_Tier', 'Income', 'Rent', 'Insurance', 'Groceries', 'Transport', 'Eating_Out', 'Entertainment', 'Utilities', 'Healthcare', 'Desired_Savings_Percentage', 
+             'Potential_Savings_Groceries', 'Potential_Savings_Transport', 'Potential_Savings_Eating_Out', 'Potential_Savings_Entertainment', 'Potential_Savings_Utilities', 'Potential_Savings_Healthcare', 'Potential_Savings_Education', 'Potential_Savings_Miscellaneous',
+            'Income_transform', 'Rent_transform', 'Insurance_transform', 'Groceries_transform', 'Transport_transform', 'Eating_Out_transform', 'Entertainment_transform', 'Utilities_transform', 'Healthcare_transform', 'Desired_Savings_Percentage',
+             'Potential_Savings_Groceries_transform', 'Potential_Savings_Transport_transform', 'Potential_Savings_Eating_Out_transform', 'Potential_Savings_Entertainment_transform', 'Potential_Savings_Utilities_transform', 'Potential_Savings_Healthcare_transform', 'Potential_Savings_Miscellaneous_transform'], axis=1)
 y = df['Income_transform']
 
-# Split the dataset into X_train, X_test, y_train, and y_test, 10% of the data for testing
+# Split the dataset into X_train, X_test, y_train, and y_test, 20% of the data for testing
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
 # Instantiate a linear regression model
@@ -161,12 +166,12 @@ Occupation_encode = ['Professional', 'Student', 'Self_Employed', 'Retired'].inde
 City_Tier_encode = ['Tier_1', 'Tier_2', 'Tier_3'].index(City_Tier)
 
 # Total stuff
-total_potential_savings = (Potential_Savings_Groceries + Potential_Savings_Transport + Potential_Savings_Eating_Out + Potential_Savings_Entertainment + Potential_Savings_Utilities + Potential_Savings_Healthcare + Potential_Savings_Education +  Potential_Savings_Miscellaneous)
-total_expenses = (Loan_Repayment + Insurance + Groceries + Transport + Eating_Out + Entertainment + Utilities + Healthcare + Education + Miscellaneous)
+# total_potential_savings = (Potential_Savings_Groceries + Potential_Savings_Transport + Potential_Savings_Eating_Out + Potential_Savings_Entertainment + Potential_Savings_Utilities + Potential_Savings_Healthcare + Potential_Savings_Education +  Potential_Savings_Miscellaneous)
+# total_expenses = (Loan_Repayment + Insurance + Groceries + Transport + Eating_Out + Entertainment + Utilities + Healthcare + Education + Miscellaneous)
 # st.write(total_potential_savings)
 
 # Predict charges
-predicted_Income_transformed = linear_model.predict([[Age, Dependents, Occupation_encode, City_Tier_encode, Rent, total_expenses, Desired_Savings_Pourcentage, Desired_Savings, Disposable_Income, total_potential_savings]])
+predicted_Income_transformed = linear_model.predict([[Age, Dependents, Occupation_encode, City_Tier_encode, Rent, Desired_Savings_Pourcentage, Desired_Savings, Disposable_Income]])
 
 # Reverse the Box-Cox transformation, no one knows, search later
 predicted_Income = inv_boxcox(predicted_Income_transformed, lambda_value)
