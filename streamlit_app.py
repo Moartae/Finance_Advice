@@ -15,17 +15,19 @@ from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
+# from scipy.stats import boxcox
 from scipy.special import inv_boxcox
 from scipy.stats import boxcox_normplot
 
 
 st.title("Finance Adviser")
+st.write('hi')
 
 # this is subtitle 
 st.subheader('Raw Data')
 
 # The URL of the CSV file to be read into a DataFrame
-csv_url = "./cleaned_data.csv"
+csv_url = "./data/cleaned_data_no_negatives.csv"
 
 # Reading the CSV data from the specified URL into a DataFrame named 'df'
 df = pd.read_csv(csv_url)
@@ -39,7 +41,7 @@ df.drop_duplicates(keep='first', inplace=True)
 st.write('### Display Numerical Plots')
 
 # Select box to choose which feature to plot
-feature_to_plot = st.selectbox('Select a numerical feature to plot', ['Income', 'Age', 'Dependents', 'Rent', 'Loan_Repayment', 'Insurance', 'Groceries', 'Transport', 'Eating_Out', 'Entertainment', 'Utilities', 'Healhcare', 'Education', 'Miscellaneous', 'Desired_Saving_Pourcentage', 'Desired_Savings', 'Disposable_Income', 'Potential_Savings_Groceries', 'Potential_Savings_Transport', 'Potential_Savings_Eating_Out', 'Potential_Savings_Entertainment', 'Potential_Savings_Utilities', 'Potential_Savings_Healthcare', 'Potential_Savings_Education', 'Potential_Savings_Miscellaneous'])
+feature_to_plot = st.selectbox('Select a numerical feature to plot', ['Income', 'Age', 'Dependents', 'Rent', 'Loan_Repayment', 'Insurance', 'Groceries', 'Transport', 'Eating_Out', 'Entertainment', 'Utilities', 'Healhcare', 'Education', 'Miscellaneous', 'Desired_Saving_Pourcentage', 'Desired_Savings', 'Potential_Savings_Groceries', 'Potential_Savings_Transport', 'Potential_Savings_Eating_Out', 'Potential_Savings_Entertainment', 'Potential_Savings_Utilities', 'Potential_Savings_Healthcare', 'Potential_Savings_Education', 'Potential_Savings_Miscellaneous'])
 
 # Plot the selected feature
 if feature_to_plot:
@@ -93,7 +95,7 @@ df['Utilities_transform'], lambda_value = stats.boxcox(df['Utilities'])
 df['Healthcare_transform'], lambda_value = stats.boxcox(df['Healthcare'])
 # df['Education_transform'], lambda_value = stats.boxcox(df['Education'])
 # df['Miscellaneous_transform'], lambda_value = stats.boxcox(df['Miscellaneuous'])
-df['Desired_Savings_Pourcentage_transform'], lambda_value = stats.boxcox(df['Desired_Savings_Percentage'])
+df['Desired_Savings_Percentage_transform'], lambda_value = stats.boxcox(df['Desired_Savings_Percentage'])
 # df['Desired_Savings_transform'], lambda_value = stats.boxcox(df['Desired_Savings'])
 # df['Disposable_Income_transform'], lambda_value = stats.boxcox(df['Disposable_Income'])
 df['Potential_Savings_Groceries_transform'], lambda_value = stats.boxcox(df['Potential_Savings_Groceries'])
@@ -108,10 +110,11 @@ df['Potential_Savings_Miscellaneous_transform'], lambda_value = stats.boxcox(df[
 
 # Define X (features) and y (target) and remove duplicate features that will not be used in the model
 
-X = df.drop(['Occupation', 'City_Tier', 'Income', 'Rent', 'Insurance', 'Groceries', 'Transport', 'Eating_Out', 'Entertainment', 'Utilities', 'Healthcare', 'Desired_Savings_Percentage', 
+X = df.drop(['Occupation', 'City_Tier', 'Income', 'Rent', 'Insurance', 'Groceries', 'Transport', 'Eating_Out', 'Entertainment', 'Utilities', 'Healthcare', 'Desired_Savings_Percentage', 'Education', 'Loan_Repayment', 'Miscellaneous', 'Desired_Savings', 'Potential_Savings_Education',
              'Potential_Savings_Groceries', 'Potential_Savings_Transport', 'Potential_Savings_Eating_Out', 'Potential_Savings_Entertainment', 'Potential_Savings_Utilities', 'Potential_Savings_Healthcare', 'Potential_Savings_Education', 'Potential_Savings_Miscellaneous',
-            'Income_transform', 'Rent_transform', 'Insurance_transform', 'Groceries_transform', 'Transport_transform', 'Eating_Out_transform', 'Entertainment_transform', 'Utilities_transform', 'Healthcare_transform', 'Desired_Savings_Percentage',
-             'Potential_Savings_Groceries_transform', 'Potential_Savings_Transport_transform', 'Potential_Savings_Eating_Out_transform', 'Potential_Savings_Entertainment_transform', 'Potential_Savings_Utilities_transform', 'Potential_Savings_Healthcare_transform', 'Potential_Savings_Miscellaneous_transform'], axis=1)
+            'Income_transform', 'Rent_transform', 'Insurance_transform', 'Groceries_transform', 'Transport_transform', 'Eating_Out_transform', 'Entertainment_transform', 'Utilities_transform', 'Healthcare_transform', 
+            'Desired_Savings_Percentage_transform', 
+            'Potential_Savings_Groceries_transform', 'Potential_Savings_Transport_transform', 'Potential_Savings_Eating_Out_transform', 'Potential_Savings_Entertainment_transform', 'Potential_Savings_Utilities_transform', 'Potential_Savings_Healthcare_transform', 'Potential_Savings_Miscellaneous_transform'], axis=1)
 y = df['Income_transform']
 
 # Split the dataset into X_train, X_test, y_train, and y_test, 20% of the data for testing
@@ -147,9 +150,9 @@ Utilities = st.slider('Utilities (in 1000₹)', min_value=df['Utilities_transfor
 Healthcare = st.slider('Healthcare (in 1000₹)', min_value=df['Healthcare_transform'].min(), max_value=df['Healthcare_transform'].max(), value=df['Healthcare_transform'].mean())
 Education = st.slider('Education', min_value=df['Education'].min(), max_value=df['Education'].max(), value=df['Education'].mean())
 Miscellaneous = st.slider('Miscellaneous', min_value=df['Miscellaneous'].min(), max_value=df['Miscellaneous'].max(), value=df['Miscellaneous'].mean())
-Desired_Savings_Pourcentage = st.slider('Desired_Savings_Pourcentage (in 1000₹)', min_value=df['Desired_Savings_Pourcentage_transform'].min(), max_value=df['Desired_Savings_Pourcentage_transform'].max(), value=df['Desired_Savings_Pourcentage_transform'].mean())
+Desired_Savings_Percentage = st.slider('Desired_Savings_Percentage (in 1000₹)', min_value=df['Desired_Savings_Percentage_transform'].min(), max_value=df['Desired_Savings_Percentage_transform'].max(), value=df['Desired_Savings_Percentage_transform'].mean())
 Desired_Savings = st.slider('Desired_Savings', min_value=df['Desired_Savings'].min(), max_value=df['Desired_Savings'].max(), value=df['Desired_Savings'].mean())
-Disposable_Income = st.slider('Disposable_Income', min_value=df['Disposable_Income'].min(), max_value=df['Disposable_Income'].max(), value=df['Disposable_Income'].mean())
+# Disposable_Income = st.slider('Disposable_Income', min_value=df['Disposable_Income'].min(), max_value=df['Disposable_Income'].max(), value=df['Disposable_Income'].mean())
 Potential_Savings_Groceries = st.slider('Potential_Savings_Groceries (in 1000₹)', min_value=df['Potential_Savings_Groceries_transform'].min(), max_value=df['Potential_Savings_Groceries_transform'].max(), value=df['Potential_Savings_Groceries_transform'].mean())
 Potential_Savings_Transport = st.slider('Potential_Savings_Transport (in 1000₹)', min_value=df['Potential_Savings_Transport_transform'].min(), max_value=df['Potential_Savings_Transport_transform'].max(), value=df['Potential_Savings_Transport_transform'].mean())
 Potential_Savings_Eating_Out = st.slider('Potential_Savings_Eating_Out (in 1000₹)', min_value=df['Potential_Savings_Eating_Out_transform'].min(), max_value=df['Potential_Savings_Eating_Out_transform'].max(), value=df['Potential_Savings_Eating_Out_transform'].mean())
@@ -167,16 +170,23 @@ City_Tier_encode = ['Tier_1', 'Tier_2', 'Tier_3'].index(City_Tier)
 
 # Total stuff
 total_potential_savings = (Potential_Savings_Groceries + Potential_Savings_Transport + Potential_Savings_Eating_Out + Potential_Savings_Entertainment + Potential_Savings_Utilities + Potential_Savings_Healthcare + Potential_Savings_Education +  Potential_Savings_Miscellaneous)
-total_expenses = (Loan_Repayment + Insurance + Groceries + Transport + Eating_Out + Entertainment + Utilities + Healthcare + Education + Miscellaneous)
+total_expenses = (Rent + Loan_Repayment + Insurance + Groceries + Transport + Eating_Out + Entertainment + Utilities + Healthcare + Education + Miscellaneous)
+total_others = (Desired_Savings + Desired_Savings_Percentage + Dependents + total_expenses + total_potential_savings) 
 # st.write(total_potential_savings)
 
 # Predict charges
-predicted_Income_transformed = linear_model.predict([[Age, Dependents, Occupation_encode, City_Tier_encode, Rent, Desired_Savings_Pourcentage, Desired_Savings, Disposable_Income, total_expenses, total_potential_savings]])
+# predicted_Income_transformed = linear_model.predict([[Age, Dependents, Occupation_encode, City_Tier_encode, Rent, Desired_Savings_Pourcentage, Desired_Savings, Disposable_Income, total_expenses, total_potential_savings]])
 
 # Reverse the Box-Cox transformation, no one knows, search later
-predicted_Income = inv_boxcox(predicted_Income_transformed, lambda_value)
+# predicted_Income = inv_boxcox(predicted_Income_transformed, lambda_value)
 
-st.write('updated')
+
+# Later, when predicting
+predicted_Income_transformed = linear_model.predict([[Age, Occupation_encode, City_Tier_encode, total_others]])
+
+# Use inv_boxcox to transform back
+# Important: inv_boxcox expects a scalar, so use predicted_Income_transformed[0]
+predicted_Income = inv_boxcox(predicted_Income_transformed[0], lambda_value)
 
 # Display prediction
-st.write('Predicted Income:', round(predicted_Income[0], 0))
+st.write('Predicted Income:', round(predicted_Income, 0))
