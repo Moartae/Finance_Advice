@@ -37,7 +37,12 @@ df.drop_duplicates(keep='first', inplace=True)
 st.write('### Display Numerical Plots')
 
 # Select box to choose which feature to plot
-feature_to_plot = st.selectbox('Select a numerical feature to plot', ['Income', 'Age', 'Dependents', 'Rent', 'Loan_Repayment', 'Insurance', 'Groceries', 'Transport', 'Eating_Out', 'Entertainment', 'Utilities', 'Healhcare', 'Education', 'Miscellaneous', 'Desired_Saving_Pourcentage', 'Desired_Savings', 'Potential_Savings_Groceries', 'Potential_Savings_Transport', 'Potential_Savings_Eating_Out', 'Potential_Savings_Entertainment', 'Potential_Savings_Utilities', 'Potential_Savings_Healthcare', 'Potential_Savings_Education', 'Potential_Savings_Miscellaneous'])
+feature_to_plot = st.selectbox('Select a numerical feature to plot', 
+                               ['Income', 'Age', 'Dependents', 'Rent', 'Loan_Repayment', 'Insurance', 'Groceries', 'Transport', 
+                                'Eating_Out', 'Entertainment', 'Utilities', 'Healhcare', 'Education', 'Miscellaneous', 
+                                'Desired_Saving_Pourcentage', 'Desired_Savings', 'Potential_Savings_Groceries', 'Potential_Savings_Transport', 
+                                'Potential_Savings_Eating_Out', 'Potential_Savings_Entertainment', 'Potential_Savings_Utilities', 
+                                'Potential_Savings_Healthcare', 'Potential_Savings_Education', 'Potential_Savings_Miscellaneous'])
 
 # Plot the selected feature
 if feature_to_plot:
