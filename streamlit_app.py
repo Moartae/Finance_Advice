@@ -20,7 +20,7 @@ from scipy.special import inv_boxcox
 from scipy.stats import boxcox_normplot
 
 
-st.title("Finance Adviser UwU")
+st.title("Finance Adviser")
 
 # this is subtitle 
 st.subheader('Raw Data')
