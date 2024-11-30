@@ -196,4 +196,4 @@ predicted_Income_transformed = linear_model.predict(user_input)
 predicted_Income = inv_boxcox(predicted_Income_transformed[0], lambda_Income)
 
 # Display prediction
-st.write('Predicted Income:', round(predicted_Income, 0))
+st.write('# Predicted Income:', round(predicted_Income, 0))
