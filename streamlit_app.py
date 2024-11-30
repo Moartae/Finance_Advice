@@ -21,7 +21,6 @@ from scipy.stats import boxcox_normplot
 
 
 st.title("Finance Adviser UwU")
-st.write('hi')
 
 # this is subtitle 
 st.subheader('Raw Data')
