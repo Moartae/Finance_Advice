@@ -181,7 +181,7 @@ total_others = (Desired_Savings + Desired_Savings_Percentage + Dependents + tota
 
 
 # Later, when predicting
-predicted_Income_transformed = linear_model.predict([[Age, Occupation_encode, City_Tier_encode, total_others]])
+predicted_Income_transformed = linear_model.predict([[Age, Occupation_encode, City_Tier_encode, total_expenses]])
 
 # Use inv_boxcox to transform back
 # Important: inv_boxcox expects a scalar, so use predicted_Income_transformed[0]
